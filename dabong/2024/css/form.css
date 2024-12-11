@@ -1,0 +1,187 @@
+.contact_content .flist {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+@media screen and (min-width: 1025px) {
+  .contact_content .flist>li:nth-of-type(1),
+  .contact_content .flist>li:nth-of-type(2) {
+    width: calc(50% - 20px);
+  }
+}
+.contact_content .flist>li {
+  width: 100%;
+  /* margin: 0 0 30px; */
+}
+.contact_content .flist>li .fbox {
+
+  position: relative;
+  padding: 20px 30px;
+  border:none;
+  border-bottom:1px solid rgba(0, 0, 0, 1);
+  width:100%;
+}
+.contact_content .flist>li dl { display: flex; align-items: center;}
+.contact_content .flist>li dl dt {
+  min-width: 140px;
+  font-size: 22px;
+  font-size: clamp(14px, 2.5vw, 22px);
+  font-family: "Pretendard";
+}
+.contact_content .flist>li dl dt label.require_icon:after {width:13px; height:13px; display:inline-block; content:''; background:url('https://www.nexsmartmedia.co.kr/resources/img/common/require_icon.png') no-repeat center top;vertical-align: top; background-size:13px 13px; margin-left:4px;}
+.contact_content .flist>li dl dd { width: calc(100% - 180px); }
+
+
+
+.contact_content .flist>li dl dd input.contactInput {
+  width: 100%;
+  border: none;
+  font-size: clamp(14px, 2.5vw, 22px);
+  padding: 0;
+}
+.contact_content .flist>li dl dd input.contactInput:autofill,
+.contact_content .flist>li dl dd input.contactInput:autofill:hover,
+.contact_content .flist>li dl dd input.contactInput:autofill:focus {
+  background: #1c1c1c;
+}
+.contact_content .flist>li dl dd input.contactInput:-webkit-autofill,
+.contact_content .flist>li dl dd input.contactInput:-webkit-autofill:hover,
+.contact_content .flist>li dl dd input.contactInput:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0px 1000px #1c1c1c inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+.contact_content .flist>li dl dd textarea.text_content_box {
+  width: 100%;
+  border: none;
+  font-size: clamp(14px, 2.5vw, 22px);  
+}
+.contact_content .flist>li dl dd input.contactInput::placeholder,
+.contact_content .flist>li dl dd textarea.text_content_box::placeholder {
+
+  opacity: 0.4;
+  font-size: 14px;
+  font-family: "Pretendard";
+  font-weight: 400;
+}
+
+.contact_content .flist>li dl.inquire {
+  flex-direction: column;
+}
+.contact_content .flist>li dl.inquire dt { width: 100%;}
+.contact_content .flist>li dl.inquire dd { width: 100%;}
+
+.contact_content .flist > li button[type="button"] {
+  font-family: 'Pretendard';
+  /* border:1px solid rgba(255,255,255,.4); */
+  /* color:rgba(255, 255, 255, .4); */
+  font-size:22px;
+  margin: 2px 5px 2px 0;
+  padding:12px 1rem;
+  border-radius: 50px;
+}
+@media screen and (max-width: 640px) {
+  .contact_content .flist>li .fbox { padding: 10px 20px; }
+  .contact_content .flist>li dl {
+    flex-direction: column;
+  }
+  .contact_content .flist>li dl dt { width: 100%; padding: 2vw 0; }
+  .contact_content .flist>li dl dd { width: 100%; }
+  .contact_content .flist > li button[type="button"] {
+    padding: 2vw 5vw;
+  }
+}
+
+.contact_content .flist > li button.active[type="button"] {background-color:#fff; color:#000; font-weight: 500;}
+/* .contact_content .flist .inquiry_form_service_text{position:absolute; right:20px; top:35px;} */
+.contact_content .service_btn_box { display: flex;  align-items: center; flex-wrap: wrap; }
+.contact_content .service_btn_box li { 
+  /* margin: 0 5px 0 0; */
+}
+
+
+ .contact_content .agree { padding: 40px 0 0; }
+.contact_content .agree label { }
+
+.agree-check-group {
+  display: flex;
+  align-items: center
+}
+
+.agree-check-group .form-check-box {
+  margin-right: 8px
+}
+
+.agree-check-group .btn-agree-nav {
+  font-size: 18px;
+  font-weight: 500;
+  color: #52525b
+}
+
+.form-check-box input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.form-check-box.check input:checked+.form-check-icon:before {
+  background: #000;
+  border-color: #000
+}
+
+.form-check-box.check input:disabled+.form-check-icon {
+  opacity: .5
+}
+
+.form-check-box.check .form-check-icon {
+  min-width: 24px;
+  min-height: 24px
+}
+
+.form-check-box.check .form-check-icon:before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border: 1px solid #d4d4d8;
+  border-radius: 4px
+}
+
+.form-check-box.check .form-check-icon:after {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  background: url(https://www.samwonpaper.com/resources/_asset/pc/common/images/icon/icon-checkbox-white.png) center center no-repeat;
+  background-size: 16px auto;
+  left:0; top:0;
+  position: absolute;
+}
+
+
+.file_box {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.file_box .upload_name {height:100%; width:calc(100% - 70px); border:none; background-color: #1c1c1c; font-size:14px;}
+.file_box label {padding:15px 20px;}
+
+.file_box input[type="file"] {
+  /* 파일 필드 숨기기 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

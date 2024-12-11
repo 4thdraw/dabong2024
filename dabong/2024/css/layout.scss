@@ -1,0 +1,536 @@
+// 공통클래스
+@use "sass:math";
+.backgroundno{
+  background: none !important;
+}
+.zup{
+  z-index: 20;
+}
+.text-black{
+   color:black !important
+   
+}
+.fs18{
+  font-size: 18px !important;
+}
+.fs21{
+  font-size: 21px !important;
+}
+.fs24{
+  font-size: 24px !important;
+}
+.fs36{
+  font-size: 36px !important;
+}
+.fs54{
+  font-size: 54px !important;
+}
+.fs75{
+  font-size: 75px !important;
+}
+.fs88{
+  font-size: 88px !important;
+}
+.fs100{
+  font-size: 100px !important;
+}
+.mw-none {
+  max-width: none !important;
+}
+
+.afternone:after,
+.beforenone:before{
+  display: none !important;
+
+}
+
+
+
+
+@mixin generate-lh($start, $end, $step) {
+  @for $i from $start through $end {
+    $value: $i * $step + $start;
+    .lh-#{$value * 10} {
+      line-height: $value !important;
+    }
+  }
+}
+
+
+@include generate-lh(0, 20, 0.1);
+
+@mixin generate-fs($start, $end, $step) {
+  @for $i from $start through $end {
+    $value: $i * $step; // Calculate font size
+    $integer: floor($value); // Get the integer part
+    $fraction: floor(($value - $integer) * 10); // Get the fractional part
+
+    .fs-#{$integer}#{$fraction} {
+      font-size: #{$value}em !important;
+    }
+  }
+}
+
+@include generate-fs(0, 20, 0.1);
+
+
+
+.afterslush{
+  position: relative;
+  &.text-black:after{
+    background: rgba(161, 161, 161, 1) !important;
+  }
+}
+.afterslush:not(:last-child):after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -0.825em;
+    margin: auto;
+    width: 1px;
+    height: 1em;
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(25deg);
+}
+.b_ani_line{
+  position: relative;
+}
+.b_ani_line:after{
+  
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: #fff;
+    pointer-events: none;   
+
+}
+
+
+//ui 공통
+// 컨트롤러
+#autoplay-toggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* SVG 밖으로 나가는 부분을 숨김 */
+}
+
+
+
+.whitecolor{ 
+  color:white !important; 
+  border-color:white !important;
+  &:after{
+    background-color: white !important;
+  }
+
+}
+
+
+
+/* 아이콘 위치 및 크기 조정 */
+.icons_pause {
+  font-size: 24px;
+  color: #000; /* 아이콘 색상 */
+  z-index: 2; /* 로딩 애니메이션 위에 위치 */
+}
+
+//앞뒤버튼
+
+.swiper{
+  .main_iconArrow{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 45px;
+    height: 2px;
+    background-color: #fff;
+    transition: background-color .4s ease;
+      &:after,
+      &:before {
+        content: "";
+        position: absolute;
+        top: -6px;
+        left: -4px;
+        width: 18px;
+        height: 2px;
+        background-color: #fff;
+        transform: rotate(134deg);
+        transition: background-color .4s ease;
+      }
+      &:after {
+        top: 6px;
+        left: -4px;
+        transform: rotate(-134deg);
+        }
+      
+  }
+  .main_btnNext{
+    transform: rotate(180deg);
+    order:10;
+    position: relative;
+    top:2px;
+  }
+
+  .main_btnPlay{
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    &:after {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 12px;
+      border-left: 2px solid #fff;
+      border-right: 2px solid #fff;
+   }
+   &.icons_play:after{  
+    border-radius: 3px;
+    border-color: transparent transparent transparent #ff5722;
+    border-style: solid;
+    border-width: 8px 10px;
+    margin-left: 12px;
+
+   }
+  }
+}
+
+
+
+
+
+// 애니메이션 딜레이를 설정하는 함수
+@function delay($index, $base-delay: 0.3s) {
+  @return $index * $base-delay;
+}
+
+.navbar-open {
+  .b_ani_line {
+    &:after {
+      animation-name: wani;
+      animation-duration:  1s;
+      animation-timing-function:  ease-in-out;
+      animation-fill-mode: forwards;
+
+    }
+
+   
+  }
+  // nth-child에 따라 애니메이션 딜레이 설정
+  @for $i from 1 through 10 { // 필요한 만큼 반복
+  li:nth-child(#{$i}){
+      .b_ani_line {
+        &:after {
+        animation-delay: delay($i);
+       }
+     }
+    }
+  }
+}
+
+
+@keyframes wani {
+  0%{
+    width: 0;
+  }
+  40%{
+    width: 0;
+  }
+  100%{
+    width: 100%;
+  }  
+}
+
+body{
+  .navbar {
+    -webkit-transition: top 0.3s ease-in-out, background 0.3s ease-in-out, min-height 0.3s ease-in-out;
+    -moz-transition: top 0.3s ease-in-out, background 0.3s ease-in-out, min-height 0.3s ease-in-out;
+    -ms-transition: top 0.3s ease-in-out, background 0.3s ease-in-out, min-height 0.3s ease-in-out;
+    -o-transition: top 0.3s ease-in-out, background 0.3s ease-in-out, min-height 0.3s ease-in-out;
+    transition: top 0.3s ease-in-out, background 0.3s ease-in-out, min-height 0.3s ease-in-out;
+  }
+  
+  /* Example of how to modify styles when nav is hidden */
+  .nav_up {
+    top: -100px; /* Adjust as necessary */
+    background: rgba(255, 255, 255, 0.9); /* Example background color */
+    min-height: 50px; /* Adjust as necessary */
+  }
+  
+  /* Example of how to set styles when nav is visible */
+  .navbar.visible {
+    top: 0; /* Position the navbar at the top */
+    background: rgba(255, 255, 255, 1); /* Fully opaque background */
+    min-height: 70px; /* Adjust as necessary */
+  }
+  
+  // 기본
+  .navbar-brand{
+    svg{
+      .st0{fill:#404041;}
+      .st1{fill:#F1592A;}        
+    }
+  }
+ // 메인
+
+    //활성화
+    &.submenu-on,
+    &.scroll_updown{
+      .navbar-brand{
+        svg{
+          .st0{fill:#404041 !important;}
+               
+        }
+      }
+    }
+    
+   &.scroll_updown{
+      .navbar.nav_up{ // 마우스아래로 내림
+        top:-100px;
+        background-color: rgba(255, 255, 255, 0);
+              
+      }
+      .navbar{ 
+        top:0;       
+        min-height:80px;
+        // 하얀배경 블러처리
+        background-color: rgba(255, 255, 255, 0.2); 
+        // Semi-transparent background for blur effect        
+        -webkit-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);        
+       
+      }
+
+     
+
+    }
+
+}////body
+
+
+#main-visual { 
+  
+  .swiper-slide{
+    overflow: hidden;
+    .page-header .bg{
+      transform: scale(1);
+      transition-delay: 0.3s;
+      transition: 10s ease-in;
+      background-size: cover;
+    }
+  &.swiper-slide-active{
+    .page-header .bg{
+      transform: scale(1.1);
+    }
+
+  }
+  .title {
+    color: #fff;
+    font-weight: 400;
+    font-size: 70px;
+    letter-spacing: -0.0083em;
+    // display: none;
+  }
+  
+  h4 {
+    font-weight: 200;
+    margin-top: 30px;
+    font-size: 22px;
+    font-family: "Raleway", "Noto Sans KR";
+  }
+ }
+
+  // animation-name: keyvisualAni;
+  // animation-duration: 10s;
+  // animation-delay: 1s;
+  // animation-iteration-count: infinite;
+  // animation-timing-function: linear;
+  // animation-direction: alternate;
+
+}
+
+.dotani{
+  background: linear-gradient(45deg, #ea5520, #c73400);
+  background-size: 300% 300%;
+  animation: gradientAnimation 3s ease infinite;
+  width:1rem;
+  height:1rem;
+  display: inline-block;
+}
+
+
+.morebtn{
+  font-size: min(3.5vw, 26px);
+  min-width: 115px;
+  max-width:240px;
+  line-height: 2.5;
+  padding-right: 25px;
+  color: #111;
+  border-bottom: 1px solid #111;
+  position: relative;
+  display: block;
+  text-align: left;
+  text-decoration: none;
+  &.text-white{
+    color:white;
+    border-bottom-color:white;
+    &:after{
+      background-color: white;
+    }
+  }
+
+  &:after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 1rem;
+  background-color: #111;
+  position: absolute;
+  bottom: -3px;
+  right: 4.8px;
+  transform: rotate(-43deg);
+  }
+}
+
+@keyframes keyvisualAni {
+  0% {
+    -webkit-transform: scale(1);-ms-transform: scale(1);transform: scale(1);
+  }
+
+  100% {
+    -webkit-transform: scale(1.1);-ms-transform: scale(1.1);transform: scale(1.1);
+  }
+}
+
+.observedom{
+  &.aniaction{
+
+    .masked-text-ani{
+      &::after{
+        animation-name: fillText ;
+      }
+    }
+}
+.masked-text-ani{
+  &::after{
+    animation-name: backText ;
+    //애니메이션을 안함 그래도 회색으로 나타남
+  }
+}
+}
+
+
+.masked-text-ani{
+
+  font-family: "Montserrat","Pretendard"; 
+  line-height: 0.75;
+  position: relative;
+  &::after{
+    content: attr(data-text); 
+    
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+    
+  
+    
+    background: linear-gradient(90deg, #ea5520 0%, #ea5520 50%, transparent 50%, transparent 100%);
+    background-size: 200%; /* 배경 크기를 200%로 설정 */
+    background-clip: text; /* 텍스트만 배경에 클립 */
+    -webkit-background-clip: text; /* 사파리 호환성을 위한 설정 */
+    color: transparent; /* 텍스트 자체는 투명 처리 */
+    
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    top: 0;   
+   
+  }
+  
+
+
+  &::before {
+    content: attr(data-text); 
+    /* 가상 요소로 텍스트 복제 */
+    position: absolute;
+   
+    left: 0;
+    top: 0;
+    z-index: 1;
+    color: #bfb9b94f;
+  
+  }
+ 
+ 
+}
+
+@keyframes fillText {
+  0% {
+    background-position: 100%; /* 배경을 오른쪽에 위치 */
+  }
+  
+  100% {
+    background-position: 0%; /* 배경을 왼쪽으로 이동 */
+  }
+}
+@keyframes backText {
+  0% {
+    background-position: 0%; /* 배경을 오른쪽에 위치 */
+  }
+  
+  100% {
+    background-position: 100%; /* 배경을 왼쪽으로 이동 */
+  }
+}
+
+
+
+
+.footer.observedom{
+  .masked-text-ani{
+    &.fc_fff{
+      color:transparent;
+      line-height: 1;
+      &:after{
+        background-image: linear-gradient(90deg, #ffffff 0%, #ffffff 50%, transparent 50%, transparent 100%);
+      }
+      &:before{
+        
+      }
+  }
+  }
+}
+
+//팝업
+body{
+&.modal-open{
+  height: 100vh;
+  padding-right: 0 !important;
+  .modal-dialog{
+      max-width: none !important;
+     
+  }
+}
+}
+
+
+
+
+
+
+
+
+
+
